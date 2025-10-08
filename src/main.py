@@ -62,11 +62,13 @@ def main_menu():
 
     # main loop
     while True:
-        print("\n Ferramenta de Análise de Partidas")
+        print("\nFerramenta de Análise de Partidas")
         print("1. Ver Histórico Completo de Partidas")
         print("2. Buscar Performance por Campeão")
-        print("3. Sair")
-        
+        print("3. Adicionar partida à Fila de Análise")
+        print("4. Vod-review da primeira partida na fila")
+        print("5. Sair")
+        p
         opcao = input("Escolha uma opção: ")
 
         if opcao == '1':
@@ -103,7 +105,37 @@ def main_menu():
                 gui.display_error(f"Nenhuma partida encontrada com o campeão '{champ}'.")
 
         elif opcao == '3':
-            print("Obrigado por usar a ferramenta.")
+            champ = input("Digite o nome do campeão da partida que deseja adicionar: ")
+            resultado = analyzer.analyze_champion_performance(champ)
+            
+            if resultado:
+                stats, sorted_matches = resultado
+                gui.display_matches(sorted_matches)
+                
+                try:
+                    match_index = int(input("Digite o número da partida para adicionar à fila (1, 2, ...): "))
+                    if 1 <= match_index <= len(sorted_matches):
+                        selected_match = sorted_matches[match_index - 1]
+                        analyzer.add_to_replay_queue(selected_match)
+                        gui.display_message(f"Partida com {selected_match.champion} adicionada à fila.")
+                    else:
+                        gui.display_error("Número da partida inválido.")
+                except ValueError:
+                    gui.display_error("Entrada inválida. Por favor, digite um número.")
+            else:
+                gui.display_error(f"Nenhuma partida encontrada com o campeão '{champ}'.")
+
+        elif opcao == '4':
+            gui.display_queue_header()
+            match = analyzer.process_next_in_queue()
+            if match:
+                gui.display_matches([match])
+                gui.display_message("Partida processada e removida da fila.")
+            else:
+                gui.display_message("A fila de análise está vazia.")
+
+        elif opcao == '5':
+            print("Obrigado por usar POLI.GG")
             break
             
         else:

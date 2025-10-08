@@ -8,14 +8,8 @@ class Rich:
 
     def display_matches(self, matches):
         for match in matches:
-            
-            if match.outcome == "Victory":
-                border = "green"
-            else:
-                border = "red"
-            
+            border = "green" if match.outcome == "Victory" else "red"
             outcome_text = Text(match.outcome.upper(), style=f"bold {border}")
-
             
             score = Text()
             score.append(f"{match.kills} / ")
@@ -47,18 +41,15 @@ class Rich:
 
     def display_champion_summary(self, champion, stats):
         text = Text()
-        
         wr = stats['win_rate']
         wins = stats['victories']
         total = stats['total_matches']
         losses = total - wins
         
-
         wr_color = 'green' if wr >= 50 else 'red'
         text.append("Win Rate: ")
         text.append(f"{wr:.2f}%", style=f"bold {wr_color}")
         text.append(f" ({wins}V / {losses}D)\n")
-        
         
         text.append("KDA Médio: ")
         text.append(f"{stats['avg_kda_ratio']:.2f}:1", style="yellow")
@@ -78,3 +69,9 @@ class Rich:
 
     def display_error(self, msg):
         self.console.print(f"\n[bold red]{msg}[/bold red]")
+
+    def display_message(self, msg):
+        self.console.print(f"\n[bold green]{msg}[/bold green]")
+
+    def display_queue_header(self):
+        self.console.print("\n[bold underline]Processando Próxima Partida da Fila[/bold underline]")

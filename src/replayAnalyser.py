@@ -29,7 +29,6 @@ class HistoryAnalyzer:
         if len(champ_matches) == 0:
             return None
 
-
         total = len(champ_matches)
         wins = 0
         total_kills = 0
@@ -58,3 +57,9 @@ class HistoryAnalyzer:
         sorted_matches = merge_sort(champ_matches, 'date')
         
         return stats, sorted_matches
+
+    def add_to_replay_queue(self, match):
+        self.replay_queue.enqueue(match)
+
+    def process_next_in_queue(self):
+        return self.replay_queue.dequeue()
