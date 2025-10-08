@@ -3,19 +3,20 @@ from replaySorting import merge_sort
 from LinkedList import LinkedList
 
 class HistoryAnalyzer:
+    #instaciating match history and vod review queue.
     def __init__(self):
         self.match_history = LinkedList()
         self.replay_queue = ReplayQueue()
 
     def add_match(self, match):
-        self.match_history.append(match)
+        self.match_history.append(match) #append defined on LinkedList.py
 
     def get_sorted_history(self, sort_by='date'):
         if len(self.match_history) == 0:
             return []
         
         matches = list(self.match_history)
-        return merge_sort(matches, sort_by)
+        return merge_sort(matches, sort_by) #return sorted lists of the chosen category
 
     def analyze_champion_performance(self, champ_name):
         matches = list(self.match_history)

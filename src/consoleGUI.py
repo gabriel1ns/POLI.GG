@@ -2,6 +2,8 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.text import Text
 
+#this class basically takes the gui, all of the project's logic is on the other archives.
+
 class Rich:
     def __init__(self):
         self.console = Console()

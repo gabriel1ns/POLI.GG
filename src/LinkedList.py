@@ -3,6 +3,7 @@ class Node:
         self.data = data
         self.next = None
 
+#linked list that will be used on the match history, with (append) and (__iter__) serving a huge role.
 class LinkedList:
     def __init__(self):
         self.head = None

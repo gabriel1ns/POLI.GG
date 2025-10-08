@@ -1,4 +1,4 @@
-# decidir of the criteria used in sort
+# decider of the criteria used in sort
 def get_sort_value(match, criterion):
     if criterion == 'kda':
         return match.calculate_kda()

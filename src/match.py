@@ -1,5 +1,6 @@
 import datetime
 
+#definiton of the main ADT, basically all the parameters that make one LoL match.
 class Match:
     def __init__(self, champion, outcome, kills, deaths, assists, items, cs, duration_minutes, date=None):
         self.champion = champion
