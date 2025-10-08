@@ -1,44 +1,53 @@
-
-from match import Match
-
-def get_criteria(match: Match, criteria: str):
-    if criteria == 'kda':
+# decidir of the criteria used in sort
+def get_sort_value(match, criterion):
+    if criterion == 'kda':
         return match.calculate_kda()
-    elif criteria == 'champion':
+    elif criterion == 'champion':
         return match.champion
-    return match.date  
+    else:
+        return match.date
 
-def _merge(left: list[Match], right: list[Match], criteria: str) -> list[Match]:
+# method to sort within the category
+def merge(left, right, criterion):
     result = []
-    i_left, i_right = 0, 0
-    while i_left < len(left) and i_right < len(right):
-        left_value = get_criteria(left[i_left], criteria)
-        right_value = get_criteria(right[i_right], criteria)
+    i = 0
+    j = 0
+    
+    while i < len(left) and j < len(right):
+        left_val = get_sort_value(left[i], criterion)
+        right_val = get_sort_value(right[j], criterion)
         
-        if criteria in ('kda', 'date'):
-            if left_value >= right_value:
-                result.append(left[i_left])
-                i_left += 1
+        if criterion in ('kda', 'date'):
+            if left_val >= right_val:
+                result.append(left[i])
+                i += 1
             else:
-                result.append(right[i_right])
-                i_right += 1
+                result.append(right[j])
+                j += 1
         else:
-            if left_value <= right_value:
-                result.append(left[i_left])
-                i_left += 1
+            if left_val <= right_val:
+                result.append(left[i])
+                i += 1
             else:
-                result.append(right[i_right])
-                i_right += 1
-                
-    result.extend(left[i_left:])
-    result.extend(right[i_right:])
+                result.append(right[j])
+                j += 1
+    
+    while i < len(left):
+        result.append(left[i])
+        i += 1
+    
+    while j < len(right):
+        result.append(right[j])
+        j += 1
+    
     return result
 
-def merge_sort(match_list: list[Match], criteria='date') -> list[Match]:
-    if len(match_list) <= 1:
-        return match_list
+def merge_sort(matches, criterion='date'):
+    if len(matches) <= 1:
+        return matches
 
-    middle = len(match_list) // 2
-    left_half = merge_sort(match_list[:middle], criteria)
-    right_half = merge_sort(match_list[middle:], criteria)
-    return _merge(left_half, right_half, criteria)
+    mid = len(matches) // 2
+    left = merge_sort(matches[:mid], criterion)
+    right = merge_sort(matches[mid:], criterion)
+
+    return merge(left, right, criterion)
