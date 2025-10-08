@@ -7,7 +7,7 @@ def main_menu():
     analyzer = HistoryAnalyzer()
     gui = Rich() 
 
-    # Adiciona algumas partidas de exemplo
+    # add random games
     analyzer.add_match(Match(
         champion="Garen", 
         outcome="Victory", 
@@ -60,7 +60,7 @@ def main_menu():
         date=datetime.datetime(2025, 10, 3)
     ))
 
-    # Loop principal
+    # main loop
     while True:
         print("\n Ferramenta de Análise de Partidas")
         print("1. Ver Histórico Completo de Partidas")
