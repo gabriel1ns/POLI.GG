@@ -42,7 +42,7 @@ Linguagem principal do projeto.
 1. Clone o repositório:
 ```bash
 git clone https://github.com/gabriel1ns/POLI.GG.git
-cd lol-match-analyzer
+cd src
 ```
 
 2. Instale as dependências:
