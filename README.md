@@ -24,7 +24,7 @@ Este projeto foi desenvolvido para permitir que jogadores de League of Legends a
 
 ## 🛠️ Tecnologias e Bibliotecas
 
-### Python 3.x
+### Python 3.13.7
 Linguagem principal do projeto.
 
 ### Bibliotecas Externas
